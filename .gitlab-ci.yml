@@ -5,3 +5,7 @@ test-job:
   script:
     -make testcomparaison
     -make clean
+test:
+    image: gcc:11
+    script:
+        - make test
