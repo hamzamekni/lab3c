@@ -1,0 +1,7 @@
+test-job:
+  stage: test
+  tags:
+    -lab3
+  script:
+    -make testcomparaison
+    -make clean
