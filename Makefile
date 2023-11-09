@@ -1,18 +1,18 @@
-
-
 CC=gcc
 CFLAGS=-std=c99 -Wall
 
-testcomparaison: testcomparaison.c jeu.h jeu.c
-    # build the comparaison test
-    $(CC) $(CFLAGS) $(TESTFLAGS) -o testcomparaison testcomparaison.c jeu.c
+# additional flags for gcov
+TESTFLAGS=-fprofile-arcs -ftest-coverage
 
-    # run the test, which will generate testcomparaison.gcna and testcomparaison.gcno
-    ./testcomparaison
+test: test.c counter.h counter.c
+    # build the test
+    $(CC) $(CFLAGS) $(TESTFLAGS) -o test test.c counter.c
 
-    # compute how test is covering testcomparaison.c
-    gcov -c -p testcomparaison
+    # run the test, which will generate test-counter.gcna and test-counter.gcno
+    ./test
+
+    # compute how test is covering counter.c
+    gcov -c -p test-counter
 
 clean:
-	rm -f *.o test *.gcov *.gcda *.gcno
-
+    rm -f *.o test *.gcov *.gcda *.gcno
